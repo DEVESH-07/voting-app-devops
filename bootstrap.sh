@@ -88,3 +88,4 @@ echo "  kubectl get pods"
 echo "  kubectl get svc"
 echo "  kubectl get ingress"
 echo "  kubectl get pvc"
+

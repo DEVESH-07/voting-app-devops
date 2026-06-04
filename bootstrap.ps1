@@ -39,3 +39,4 @@ Write-Host "kubectl get pods"
 Write-Host "kubectl get svc"
 Write-Host "kubectl get ingress"
 Write-Host "kubectl get pvc"
+
