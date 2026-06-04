@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: result
+  labels:
+    app: result
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: result
+
+  template:
+    metadata:
+      labels:
+        app: result
+
+    spec:
+      containers:
+        - name: result
+          image: dockersamples/examplevotingapp_result:latest
+
+          ports:
+            - containerPort: 80
+
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 10
+            periodSeconds: 10
+
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 30
+            periodSeconds: 20
+
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "500m"
+              memory: "256Mi"
