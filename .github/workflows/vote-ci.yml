@@ -89,3 +89,4 @@ jobs:
           kubectl port-forward svc/vote 8080:80 &
           sleep 10
           curl -f http://localhost:8080
+          
