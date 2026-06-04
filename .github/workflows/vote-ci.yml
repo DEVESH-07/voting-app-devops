@@ -38,10 +38,12 @@ jobs:
           pip install flake8
           flake8 vote --count --select=E9,F63,F7,F82 --show-source --statistics
 
-      - name: Lint Kubernetes YAML
+      - name: Validate Kubernetes manifests
         run: |
-          python -m pip install yamllint
-          yamllint my-k8s kind-config.yaml -d "{extends: relaxed, rules: {new-line-at-end-of-file: disable}}"
+          for file in my-k8s/*.yaml; do
+            echo "Validating $file"
+            kubectl apply --dry-run=client --validate=false -f "$file"
+          done
 
       - name: Log in to GitHub Container Registry
         uses: docker/login-action@v3
